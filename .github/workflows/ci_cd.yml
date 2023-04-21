@@ -1,7 +1,9 @@
 name: CI/CD Pipeline
 on:
   push:
-    branches: [ main ]
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -30,4 +32,4 @@ jobs:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Deploy
       run: |
-        ssh user@server "cd /path/to/project && git pull && ./manage.py migrate && systemctl restart gunicorn.service"
+        ssh ubuntu@188.121.118.178 "cd /path/to/project && git pull && ./manage.py migrate && systemctl restart gunicorn.service"
