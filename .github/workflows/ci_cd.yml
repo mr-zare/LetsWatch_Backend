@@ -33,3 +33,5 @@ jobs:
     - name: Deploy
       run: |
         ssh ubuntu@188.121.118.178 "cd /path/to/project && git pull && ./manage.py migrate && systemctl restart gunicorn.service"
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
