@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: django_db
+      MYSQL_USER: django_user
+      MYSQL_PASSWORD: django_pass
+    volumes:
+      - mysql_data:/var/lib/mysql/
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root_password
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:
