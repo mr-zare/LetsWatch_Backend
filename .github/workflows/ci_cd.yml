@@ -30,6 +30,6 @@ jobs:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Deploy
       run: |
-        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@188.121.118.178 "cd /home/ubuntu/aparat/bakcend && docker-compose pull && docker-compose up -d"
+        ssh ubuntu@188.121.118.178 "cd /home/ubuntu/aparat/bakcend && docker-compose pull && docker-compose up -d"
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
