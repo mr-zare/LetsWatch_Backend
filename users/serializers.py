@@ -3,6 +3,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
 
+
 User = get_user_model()
 
 class SignupSerializer(serializers.ModelSerializer):
@@ -10,7 +11,7 @@ class SignupSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'password', )
+        fields = ('username','email', 'password', )
 
     def validate_password(self, value):
         try:
@@ -18,6 +19,7 @@ class SignupSerializer(serializers.ModelSerializer):
         except ValidationError as e:
             raise serializers.ValidationError(str(e))
         return value
+    
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)

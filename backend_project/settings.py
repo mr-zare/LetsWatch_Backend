@@ -104,16 +104,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': '#/activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
-    'SERIALIZERS': {},
-    #/password-reset/{uid}/{token} :true ,
-    'USER_CREATE_PASSWORD_RETYPE' :True,
-    'LOGOUT_ON_PASSWORD_CHANGE':True,
-}
+# DJOSER = {
+#     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+#     'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+#     'ACTIVATION_URL': '#/activate/{uid}/{token}',
+#     'SEND_ACTIVATION_EMAIL': True,
+#     'SERIALIZERS': {},
+#     #/password-reset/{uid}/{token} :true ,
+#     'USER_CREATE_PASSWORD_RETYPE' :True,
+#     'LOGOUT_ON_PASSWORD_CHANGE':True,
+# }
 
 
 # Internationalization
@@ -138,4 +138,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#AUTH_USER_MODEL ="users.CustomUser"
+AUTH_USER_MODEL ="users.CustomUser"
