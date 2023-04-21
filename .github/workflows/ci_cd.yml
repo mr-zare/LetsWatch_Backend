@@ -30,6 +30,6 @@ jobs:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: Deploy
       run: |
-        ssh -o StrictHostKeyChecking=no -i $GITHUB_WORKSPACE/SE-KEY.pem ubuntu@188.121.118.178 "cd /home/backend/Back-end && docker-compose pull && docker-compose up -d"
+        ssh -o StrictHostKeyChecking=no -i $GITHUB_WORKSPACE/SE-KEY.pem ubuntu@188.121.118.178 "cd /home/backend/Back-end && sudo docker-compose pull && sudo docker-compose up -d"
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
