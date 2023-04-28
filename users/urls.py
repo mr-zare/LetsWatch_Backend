@@ -10,3 +10,15 @@ urlpatterns = [
     path('change-password/', ChangePasswordAPIView.as_view(), name='change_password'),
     path('logout/', LogoutAPIView.as_view(), name='logout'),
 ]
+
+
+
+
+# from django.urls import path
+# from . import views
+
+# urlpatterns = [
+#     path('signup/', views.signup, name='signup'),
+#     path('login/', views.login, name='login'),
+#     path('protected/', views.protected_page, name='protected-page'),
+# ]

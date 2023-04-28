@@ -2,7 +2,7 @@ from base64 import urlsafe_b64encode
 from django.utils.encoding import force_bytes, force_str
 
 
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordResetForm
@@ -78,3 +78,53 @@ class LogoutAPIView(APIView):
 
 
 # Create your views here.
+
+
+#/----------------------------------------------------------------#\
+
+
+# from django.shortcuts import render, redirect
+# from .models import User
+
+# def signup(request):
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         email = request.POST['email']
+#         password = request.POST['password']
+#         avatar = request.FILES.get('avatar')
+#         if User.objects.filter(username=username).exists():
+#             return render(request, 'signup.html', {'error': 'Username already in use.'})
+#         if User.objects.filter(email=email).exists():
+#             return render(request, 'signup.html', {'error': 'Email already in use.'})
+#         user = User()
+#         user.create_user(username, email, password)
+#         if avatar:
+#             user.avatar = avatar
+#             user.save()
+#         return redirect('login')
+#     return render(request, 'signup.html')
+
+# myapp/views.py (continued)
+
+# def login(request):
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         password = request.POST['password']
+#         user = User.objects.filter(username=username, password=hashlib.sha256(password.encode()).hexdigest()).first()
+#         if user:
+#             request.session['user_id'] = user.id
+#             return redirect('protected-page')
+#         else:
+#             return render(request, 'login.html', {'error': 'Invalid username or password.'})
+#     return render(request, 'login.html')
+
+# myapp/views.py (continued)
+
+
+# from django.contrib.auth.decorators import login_required
+
+# @login_required
+# def protected_page(request):
+#     user_id = request.session.get('user_id')
+#     user = User.objects.get(id=user_id)
+#     return render(request, 'protected.html', {'user': user})

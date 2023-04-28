@@ -11,8 +11,9 @@ class SignupSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username','email', 'password', )
-
+        #fields = ('username','email', 'password', )
+        fields = ('username','email', 'password','avatar', )
+        
     def validate_password(self, value):
         try:
             validate_password(value)
