@@ -15,10 +15,15 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import SignupSerializer, ForgotPasswordSerializer, ChangePasswordSerializer
-
+from rest_framework.generics import RetrieveUpdateAPIView
 from users.models import CustomUser
 
 
+
+class UserEdit(RetrieveUpdateAPIView):
+    # permission_classes=[IsAuthenticated]
+    serializer_class=SignupSerializer
+    queryset=CustomUser.objects.all()
 
 class SignupAPIView(generics.CreateAPIView):
     serializer_class = SignupSerializer
@@ -128,3 +133,27 @@ class LogoutAPIView(APIView):
 #     user_id = request.session.get('user_id')
 #     user = User.objects.get(id=user_id)
 #     return render(request, 'protected.html', {'user': user})
+
+
+
+#----------------------------------------------edit  profile-----------------------------------
+
+# from django.contrib.auth.decorators import login_required
+# from django.contrib import messages
+# from .forms import EditProfileForm
+
+# @login_required
+# def edit_profile(request):
+#     if request.method == 'POST':
+#         form = EditProfileForm(request.POST, request.FILES, instance=request.user)
+#         if form.is_valid():
+#             # Save the updated user object with the new values
+#             user = form.save(commit=False)
+#             user.email = request.user.email  # Make sure email doesn't get changed
+#             user.save()
+#             messages.success(request, 'Your profile has been updated!')
+#             return redirect('profile')
+#     else:
+#         # Display the edit profile form
+#         form = EditProfileForm(instance=request.user)
+#     return render(request, 'edit_profile.html', {'form': form})

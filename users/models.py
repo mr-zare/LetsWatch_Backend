@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
     email=models.EmailField(unique=True)
     password=models.CharField(max_length=64)
     avatar=models.ImageField(upload_to='avatars/',default='avatars/default.jpg')
-    REQUIRED_FIELDS=['email', 'password']
+    REQUIRED_FIELDS=['email', 'password','avatar',]
     USERNAME_FIELD='username'
     
     # def create_user(self,username,email,password):
