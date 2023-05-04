@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractUser,User
 class CustomUser(AbstractUser):
     username=models.CharField(max_length=30,unique=True)
     email=models.EmailField(unique=True)
-    password=models.CharField(max_length=64)
+    # password=models.CharField(max_length=64)
     avatar=models.ImageField(upload_to='avatars/',default='avatars/default.jpg')
     REQUIRED_FIELDS=['email', 'password','avatar',]
     USERNAME_FIELD='username'

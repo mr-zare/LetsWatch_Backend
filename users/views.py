@@ -14,7 +14,7 @@ from rest_framework import generics, status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import SignupSerializer, ForgotPasswordSerializer, ChangePasswordSerializer
+from .serializers import SignupSerializer, ForgotPasswordSerializer, ChangePasswordSerializer, EditProfileSerializer
 from rest_framework.generics import RetrieveUpdateAPIView
 from users.models import CustomUser
 
@@ -22,7 +22,7 @@ from users.models import CustomUser
 
 class UserEdit(RetrieveUpdateAPIView):
     # permission_classes=[IsAuthenticated]
-    serializer_class=SignupSerializer
+    serializer_class=EditProfileSerializer
     queryset=CustomUser.objects.all()
 
 class SignupAPIView(generics.CreateAPIView):

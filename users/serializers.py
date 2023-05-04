@@ -20,7 +20,26 @@ class SignupSerializer(serializers.ModelSerializer):
         except ValidationError as e:
             raise serializers.ValidationError(str(e))
         return value
+    def create(self, validated_data):
+        user = User.objects.create(username=validated_data.get('username'), email=validated_data.get('email'))
+        user.set_password(validated_data.get('password'))
+        user.avatar=validated_data.get('avatar')
+        user.save()
+        return user
     
+class EditProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        #fields = ('username','email', 'password', )
+        fields = ('username','avatar')
+        
+    def validate_password(self, value):
+        try:
+            validate_password(value)
+        except ValidationError as e:
+            raise serializers.ValidationError(str(e))
+        return value
+
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
