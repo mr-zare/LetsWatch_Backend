@@ -9,11 +9,11 @@ ENV PYTHONDONTWRITEBYTECODE 1
 WORKDIR /app
 
 # Create a virtual environment and activate it
-RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
+RUN python -m venv venv
+ENV PATH="/venv/bin:$PATH"
 
 # Activate the virtual environment
-RUN . /opt/venv/bin/activate
+RUN . venv/bin/activate
 
 # Copy the requirements file into the container at /app
 COPY requirements.txt /app/
@@ -29,4 +29,4 @@ COPY . /app/
 EXPOSE 8000
 
 # Run the Django development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver"]
