@@ -37,7 +37,7 @@ The Django application can be configured using environment variables. The follow
     DJANGO_DEBUG: Whether or not to enable debug mode in Django. Default is True.
     DJANGO_ALLOWED_HOSTS: A comma-separated list of allowed hostnames for the Django application. Default is localhost,127.0.0.1.
     DATABASE_URL: The connection URL for the database. Default is sqlite:////app/db.sqlite3.
-    DATABASE_NAME: db_aparat.
+    DATABASE_NAME: db_letswatch.
     DATABASE_USER: admin.
     DATABASE_PASSWORD: ****.
     DATABASE_HOST: .
