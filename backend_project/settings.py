@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_letswatch',
         'USER': 'root',
-        'PASSWORD': '20001379',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
     }
