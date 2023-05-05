@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'users',
     'corsheaders',
+    'video_and_tag'
 ]
 
 MIDDLEWARE = [
