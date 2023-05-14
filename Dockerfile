@@ -17,6 +17,7 @@ RUN . venv/bin/activate
 
 # Copy the requirements file into the container at /app
 COPY requirements.txt .
+COPY .env.example /app/.env
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --upgrade pip
