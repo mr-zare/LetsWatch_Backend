@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  backend:
+    container_name: tracer-backend-prod
+    image: tracer-backend-prod
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - config/env/dev.env
+    ports:
+      - "8000:8000"
