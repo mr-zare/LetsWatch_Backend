@@ -3,18 +3,20 @@ version: "3.8"
 networks:
   traefik:
     external: true
-    
+  letswatch:
+
 services:
   backend:
     container_name: letswatch-backend
     image: letswatch-backend
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     env_file:
       - config/env/.env
     networks:
       - letswatch
+      - traefik
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.letswatch-backend.rule=Host(`api.letswatch.ir`)"
