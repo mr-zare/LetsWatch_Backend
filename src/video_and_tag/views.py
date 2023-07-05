@@ -3,6 +3,7 @@ from .models import Video, Tag
 from .serializers import VideoSerializer, TagSerializer, VideoSearchSerializer
 from rest_framework import viewsets
 from rest_framework import filters
+from rest_framework.permissions import IsAuthenticated
 
 
 class VideoViewSet(viewsets.ModelViewSet):
@@ -49,3 +50,15 @@ class VideoSearchAPIView(generics.ListAPIView):
     serializer_class = VideoSearchSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['title', 'description', 'tags__name']
+
+
+class VideoListUser(generics.ListCreateAPIView):
+    serializer_class = VideoSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Video.objects.filter(user=user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

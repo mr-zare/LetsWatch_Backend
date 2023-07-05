@@ -40,6 +40,8 @@
 *.lof
 *.log
 *.lot
+*.mp4
+*.jpg
 *.fls
 *.out
 *.toc
