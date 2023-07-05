@@ -5,31 +5,30 @@ on:
   pull_request:
     branches: [ "master" ]
 jobs:
-  build:
+  CI:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Build Docker image
-      run: |
-        docker-compose build
-    - name: Test
-      run: |
-        docker-compose run web python manage.py test
-    - name: Migrate database
-      run: |
-        docker-compose run web python manage.py migrate
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up SSH keys for deployment
-      uses: webfactory/ssh-agent@v0.5.0
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Setup python
+      uses: actions/setup-python@v3
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Deploy
+        python-version: 3.10
+    - name: Install requirements
       run: |
-        ssh -o StrictHostKeyChecking=no -i $GITHUB_WORKSPACE/SE-KEY.pem root@136.244.100.7 "cd /home/backend/Back-end && sudo docker-compose pull && sudo docker-compose up -d"
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        pip install -r requirements.txt
+    - name: Run test
+      run: |
+        cd src
+        python manage.py test
+      
+  CD:
+    needs: CI
+    runs-on: self-hosted
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Deployment
+      uses: webfactory/ssh-agent@v0.5.0
+      run: |
+        docker compose up -d --build
