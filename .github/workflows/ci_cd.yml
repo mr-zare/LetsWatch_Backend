@@ -31,10 +31,10 @@ jobs:
     needs: CI
     runs-on: self-hosted
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Deployment
-      uses: docker://webfactory/ssh-agent@v0.5.0
-      with:
-        entrypoint: /bin/sh
-        args: -c 'docker compose up -d --build'
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Deployment
+        uses: docker://webfactory/ssh-agent:v0.5.0
+        with:
+          entrypoint: /bin/sh
+          args: -c 'docker compose up -d --build'
