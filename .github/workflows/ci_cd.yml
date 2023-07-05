@@ -29,6 +29,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: Deployment
-      uses: webfactory/ssh-agent@v0.5.0
-      run: |
-        docker compose up -d --build
+      uses: docker://webfactory/ssh-agent@v0.5.0
+      with:
+        entrypoint: /bin/sh
+        args: -c 'docker compose up -d --build'
