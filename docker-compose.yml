@@ -3,7 +3,6 @@ version: "3.8"
 networks:
   traefik:
     external: true
-  letswatch:
 
 services:
   backend:
@@ -15,7 +14,6 @@ services:
     env_file:
       - config/env/.env
     networks:
-      - letswatch
       - traefik
     labels:
       - "traefik.enable=true"
