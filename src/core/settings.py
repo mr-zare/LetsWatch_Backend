@@ -6,9 +6,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
-DEBUG = os.getenv("DEBUG")
-ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS")]
+SECRET_KEY = "django-insecure-ubw8mr&6^6^c6i-ir9s913s)on64+dt)&e(l7=zc43vp9jmgui"
+DEBUG = "False"
+ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True
 REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'}
 # Application definition
@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework_api_key',
+    'rest_framework_simplejwt',
     'rest_framework',
     'drf_yasg',
     'corsheaders',
