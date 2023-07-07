@@ -5,5 +5,5 @@ urlpatterns = [
     path('tags/', TagList.as_view()),
     path('tags/<int:pk>/', TagDetail.as_view()),
     path('search/', VideoSearchAPIView.as_view(), name='video_search'),
-    path('videos/', VideoListUser.as_view()),
+    path('my-videos/', VideoListUser.as_view()),
 ]

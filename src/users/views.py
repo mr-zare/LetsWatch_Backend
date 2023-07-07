@@ -13,7 +13,8 @@ from rest_framework import generics, status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import SignupSerializer, ForgotPasswordSerializer, ChangePasswordSerializer, EditProfileSerializer
+from .serializers import SignupSerializer, ForgotPasswordSerializer, ChangePasswordSerializer, EditProfileSerializer, \
+    UserSerializer
 from rest_framework.generics import RetrieveUpdateAPIView, UpdateAPIView
 from users.models import CustomUser
 from django.contrib.auth.hashers import make_password
@@ -25,26 +26,24 @@ from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 from django.contrib import messages
 from .token import account_activation_token
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from knox.views import LoginView as KnoxLoginView
 
 
-# from .tokens import account_activation_token
-# from django.contrib.auth.views import PasswordChangeView
-# from .forms import CustomPasswordChangeForm
+class SignUpAPIView(generics.CreateAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
-# class CustomPasswordChangeView(PasswordChangeView):
-#     template_name = 'password_change.html'
-#     form_class = CustomPasswordChangeForm
-#     success_url = reverse_lazy('password_change_done')
 
-# email verfication
+class LoginAPIView(KnoxLoginView):
+    permission_classes = [AllowAny]
 
-# from django.contrib.auth.views import PasswordResetView
-# from django.urls import reverse_lazy
-# from .forms import CustomPasswordResetForm
-# class CustomPasswordResetView(PasswordResetView):
-#     # template_name = 'password_reset.html'
-#     form_class = CustomPasswordResetForm
-#     success_url = reverse_lazy('password_reset_done')
+    def post(self, request, format=None):
+        serializer = AuthTokenSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        login(request, user)
+        return super(LoginAPIView, self).post(request, format=None)
 
 
 class EditProfileView(UpdateAPIView):

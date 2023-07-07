@@ -1,14 +1,10 @@
 from django.db import models
-import hashlib
+from django.contrib.auth.models import AbstractUser
 
-from django.contrib.auth.models import AbstractUser, User
+from core.settings import MEDIA_ROOT
 
 
 class CustomUser(AbstractUser):
-    username = models.CharField(max_length=30, unique=True)
+    username = models.CharField(max_length=32, unique=True)
     email = models.EmailField(unique=True)
-    is_active = models.BooleanField(default=False)
-    # password=models.CharField(max_length=64)
-    avatar = models.ImageField(upload_to='avatars/', default='../avatars/avatars/default.jpg')
-    REQUIRED_FIELDS = ['email', 'password', 'avatar', ]
-    USERNAME_FIELD = 'username'
+    avatar = models.ImageField(upload_to='media/', default=f'{MEDIA_ROOT}/default.jpg')
