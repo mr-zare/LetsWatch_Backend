@@ -10,7 +10,7 @@ SECRET_KEY = "django-insecure-ubw8mr&6^6^c6i-ir9s913s)on64+dt)&e(l7=zc43vp9jmgui
 DEBUG = "False"
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True
-CSRF_TRUSTED_ORIGINS = ["https://api.letswatch.ir"]
+CSRF_TRUSTED_ORIGINS = ["https://api.letswatch.ir", "http://api.letswatch.ir"]
 REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'}
 # Application definition
 
@@ -72,6 +72,18 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+
+SWAGGER_SETTINGS = {
+    'DEFAULT_INFO': 'project.urls.swagger_info',
+    'SECURITY_DEFINITIONS': {
+        'Token': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
+    'SCHEMA_PROTOCOL': 'https',
 }
 
 # Password validation
